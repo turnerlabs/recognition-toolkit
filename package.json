@@ -1,0 +1,29 @@
+{
+  "name": "recognition-training-tools",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "cnn-starter-app": "git+https://github.com/cnnlabs/cnn-starter-app.git"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-register": "6.24.1",
+    "babel-resolver": "1.1.0",
+    "cnn-server": "git+https://github.com/cnnlabs/cnn-server.git#0.3.0",
+    "google-images": "^2.1.0",
+    "prop-types": "15.6.0",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "react-helmet": "5.0.3",
+    "react-hot-loader": "3.0.0-beta.6",
+    "react-router-dom": "4.1.1"
+  },
+  "scripts": {
+    "analyze": "cnn-starter-app analyze",
+    "build": "cnn-starter-app build",
+    "create": "cnn-starter-app create",
+    "start": "cnn-starter-app start",
+    "lint": "cnn-starter-app lint",
+    "test": "cnn-starter-app test"
+  }
+}

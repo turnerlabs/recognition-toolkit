@@ -1,0 +1,14 @@
+.image {
+    max-width:500px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+}
+
+.image-box {
+    float: left;
+}
+
+.images-box {
+    display: inline-block;
+}
