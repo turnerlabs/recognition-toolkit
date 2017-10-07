@@ -1,35 +1,46 @@
 import React, { Component }  from 'react';
+import axios from 'axios';
 import styles from './styles.css';
-// import axios from 'axios';
 
 class ProcessedImage extends Component {
-    state = {
-        image: null
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            images: null
+        }
+        this.setImage = this.setImage.bind(this);
+    }
+
+    setImage(url) {
+        var _this = this;
+        this.serverRequest = axios({
+            method: 'post',
+            url: 'http://santa.turnerlabs.io:5000/detect',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                url: url
+            }
+        })
+        .then((response) => {
+            console.log(response)
+            _this.setState({
+                image: <img src={response.data.image} className={styles.image}></img>
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     componentDidMount() {
-        var _this = this;
-        _this.setState({
-            image: <img src={this.props.data} className={styles.image}></img>
-        });
-        // var _this = this;
-        // this.serverRequest = axios.get('/search?q=santa%20clause')
-        // .then((response) => {
-        //     _this.setState({
-        //         images: response.data.map((image) => {
-        //             return <ProcessedImage data={image.url}></ProccessedImage>;
-        //         })
-        //     });
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
+        this.setImage(this.props.data)
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            image: <img src={nextProps.data} className={styles.image}></img>
-        });
+        this.setImage(nextProps.data)
     }
 
     componentWillUnmount() {

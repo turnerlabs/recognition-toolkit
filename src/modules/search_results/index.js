@@ -9,7 +9,7 @@ class SearchResults extends Component {
         super(props)
         this.state = {
             images: [],
-            search: 'santa%20clause'
+            search: 'santa clause'
         }
         this.updateSearch = this.updateSearch.bind(this);
         this.searchImages = this.searchImages.bind(this);

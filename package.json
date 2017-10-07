@@ -23,6 +23,7 @@
     "build": "cnn-starter-app build",
     "create": "cnn-starter-app create",
     "start": "cnn-starter-app start",
+    "start-prod": "BABEL_ENV=server NODE_ENV=production node server.js",
     "lint": "cnn-starter-app lint",
     "test": "cnn-starter-app test"
   }
