@@ -1,11 +1,12 @@
 version: "2"
 services:
-  object_detection:
-    image: turnerlabs/recognition-toolkit:0.1.1
+  recognition-toolkit:
+    image: quay.io/turner/recognition-toolkit:0.2.1
     ports:
     - 80:5050
     environment:
       PORT: 5050
       SEARCH_KEY: ${SEARCH_KEY}
       SEARCH_ID: ${SEARCH_ID}
+      HEALTHCHECK: "/hc"
 

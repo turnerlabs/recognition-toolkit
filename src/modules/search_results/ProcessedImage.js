@@ -16,7 +16,7 @@ class ProcessedImage extends Component {
         var _this = this;
         this.serverRequest = axios({
             method: 'post',
-            url: 'http://santa.turnerlabs.io:5000/detect',
+            url: 'http://object-detection-api.prod.services.ec2.dmtio.net/detect',
             headers: {
                 'Content-Type': 'application/json'
             },

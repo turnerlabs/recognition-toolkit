@@ -2,6 +2,7 @@ const server = require('cnn-server');
 const GoogleImages = require('google-images');
 const SEARCH_ID = process.env.SEARCH_ID;
 const SEARCH_KEY = process.env.SEARCH_KEY;
+const HEALTHCHECK = process.env.HEALTHCHECK || '/hc';
 const searchClient = new GoogleImages(SEARCH_ID, SEARCH_KEY);
 
 let config;
@@ -79,6 +80,11 @@ function search(req, res, next) {
     });
 }
 
+function healthcheck(req, res, next) {
+    res.json({code: 200, message: "healthy as can be..."});
+}
+
 server(config, (app, express) => {
     app.get('/search', search);
+    app.get(HEALTHCHECK, healthcheck);
 });
