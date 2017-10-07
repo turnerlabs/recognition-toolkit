@@ -45,10 +45,10 @@ class SearchResults extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles['images-box']}>
                 <input type="text" value={this.state.search} onChange={this.updateSearch}/>
                 <input type="button" onClick={this.searchImages} value="Search"></input>
-                <div className={styles['images-block']}>
+                <div className={styles['images-box']}>
                     {this.state.images}
                 </div>
             </div>

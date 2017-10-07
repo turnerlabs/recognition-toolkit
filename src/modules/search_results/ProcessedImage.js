@@ -27,8 +27,9 @@ class ProcessedImage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.data)
-        this.setState({image: nextProps.data});
+        this.setState({
+            image: <img src={nextProps.data} className={styles.image}></img>
+        });
     }
 
     componentWillUnmount() {
