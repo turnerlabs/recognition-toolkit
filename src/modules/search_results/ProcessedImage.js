@@ -10,7 +10,7 @@ class ProcessedImage extends Component {
             error: null
         }
         this.setImage = this.setImage.bind(this);
-        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+        // this.componentWillUnmount = this.componentWillUnmount.bind(this);
     }
 
     setImage(url, api) {
