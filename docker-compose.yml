@@ -1,7 +1,7 @@
 version: "2"
 services:
   recognition-toolkit:
-    image: quay.io/turner/recognition-toolkit:0.3.0
+    image: quay.io/turner/recognition-toolkit:0.3.1
     ports:
     - 80:5050
     environment:
