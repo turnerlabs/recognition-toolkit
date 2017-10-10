@@ -12,7 +12,6 @@ class Homepage extends Component {
                 <Helmet>
                     <title>Object Detection Model Tester</title>
                 </Helmet>
-                <h1>Object Detection Model Tester</h1>
                 <SearchResults></SearchResults>
             </div>
         );

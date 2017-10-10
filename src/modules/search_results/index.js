@@ -9,12 +9,19 @@ class SearchResults extends Component {
         super(props)
         let spinner = 'http://www.pngmart.com/files/4/Batman-Fidget-Spinner-PNG-Transparent.png';
         this.spinner = <img className={styles.spinner} src={spinner}/>
+        this.apis = {
+            santa: 'http://object-detection-api.prod.services.ec2.dmtio.net/detect',
+            snoopy: 'http://object-detection-api.prod-scooby.services.ec2.dmtio.net/detect'
+        };
         this.state = {
             images: this.spinner,
-            search: 'santa clause'
+            search: 'santa clause',
+            api: 'santa'
         }
         this.updateSearch = this.updateSearch.bind(this);
         this.searchImages = this.searchImages.bind(this);
+        this._handleKeyPress = this._handleKeyPress.bind(this);
+        this._handleOptionChange = this._handleOptionChange.bind(this);
     }
 
     updateSearch(event) {
@@ -30,8 +37,11 @@ class SearchResults extends Component {
         .then((response) => {
             _this.setState({
                 images: response.data.map((image, index) => {
-                    console.log(image)
-                    return <ProcessedImage key={index} data={image.url}></ProcessedImage>;
+                    return <ProcessedImage
+                                key={index}
+                                data={image.url}
+                                api={_this.apis[this.state.api]}>
+                    </ProcessedImage>;
                 })
             });
         })
@@ -48,13 +58,53 @@ class SearchResults extends Component {
         this.serverRequest.abort();
     }
 
+    _handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.searchImages();
+        }
+    }
+
+    _handleOptionChange(event) {
+        this.setState({
+            api: event.target.value
+        });
+    }
+
     render() {
         return (
             <div className={styles['images-box']}>
-                <input type="text" value={this.state.search} onChange={this.updateSearch}/>
-                <input type="button" onClick={this.searchImages} value="Search"></input>
-                <div className={styles['images-box']}>
-                    {this.state.images}
+                <div className={styles.inputs}>
+                    <input type="text"
+                       value={this.state.search}
+                       onKeyPress={this._handleKeyPress}
+                       onChange={this.updateSearch}/>
+                    <input type="button"
+                        onClick={this.searchImages}
+                        value="Search"></input>
+                    <div className={styles.radios}>
+                        <div className="radio">
+                            <label>
+                            <input type="radio"
+                                name="api"
+                                value="santa"
+                                onChange={this._handleOptionChange}
+                                defaultChecked/>
+                            Santa
+                            </label>
+                        </div>
+                        <div className="radio">
+                            <label>
+                            <input type="radio"
+                                name="api"
+                                value="snoopy"
+                                onChange={this._handleOptionChange}/>
+                            Snoopy
+                            </label>
+                        </div>
+                    </div>
+                    <div className={styles['images-box']}>
+                        {this.state.images}
+                    </div>
                 </div>
             </div>
         )

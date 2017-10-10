@@ -13,14 +13,14 @@ class ProcessedImage extends Component {
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
     }
 
-    setImage(url) {
+    setImage(url, api) {
         var _this = this;
         _this.setState({
             image: <img className={styles.image} src={url}/>
         });
         this.serverRequest = axios({
             method: 'post',
-            url: 'http://object-detection-api.prod.services.ec2.dmtio.net/detect',
+            url: api,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -30,14 +30,19 @@ class ProcessedImage extends Component {
             }
         })
         .then((response) => {
-            console.log(response)
+            if (response.data.code && response.data.code !== 200) {
+                _this.setState({
+                    image: ''
+                });
+                console.log('error', response);
+                return;
+            }
             _this.setState({
-                image: <img src={response.data.image} className={styles.image}></img>,
-                isLoading: false
+                image: <img src={response.data.image}
+                            className={styles.image}/>
             });
         })
         .catch((error) => {
-            console.log(error);
             _this.setState({
                 image: '',
                 error: error
@@ -46,11 +51,11 @@ class ProcessedImage extends Component {
     }
 
     componentDidMount() {
-        this.setImage(this.props.data)
+        this.setImage(this.props.data, this.props.api)
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.data === nextProps.data) return;
+        if (this.props.data === nextProps.data && this.props.api === nextProps.api) return;
         this.setImage(nextProps.data)
     }
 
