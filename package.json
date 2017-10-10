@@ -1,6 +1,6 @@
 {
   "name": "recognition-training-tools",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "devDependencies": {
     "cnn-starter-app": "git+https://github.com/cnnlabs/cnn-starter-app.git"
