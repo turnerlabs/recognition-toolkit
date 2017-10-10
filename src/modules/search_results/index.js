@@ -7,8 +7,10 @@ class SearchResults extends Component {
 
     constructor(props) {
         super(props)
+        let spinner = 'http://www.pngmart.com/files/4/Batman-Fidget-Spinner-PNG-Transparent.png';
+        this.spinner = <img className={styles.spinner} src={spinner}/>
         this.state = {
-            images: [],
+            images: this.spinner,
             search: 'santa clause'
         }
         this.updateSearch = this.updateSearch.bind(this);
@@ -21,6 +23,9 @@ class SearchResults extends Component {
 
     searchImages() {
         var _this = this;
+        this.setState({
+            images: _this.spinner
+        });
         this.serverRequest = axios.get('/search?q=' + _this.state.search)
         .then((response) => {
             _this.setState({

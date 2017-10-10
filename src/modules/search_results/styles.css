@@ -1,8 +1,6 @@
 .image {
-    max-width:500px;
-    max-height:300px;
-    width: auto;
-    height: auto;
+    width:500px;
+    height:300px;
 }
 
 .image-box {
@@ -11,4 +9,22 @@
 
 .images-box {
     display: inline-block;
+    width: 100%;
+    min-height: 500px;
 }
+
+.spinner {
+    max-width: 240px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    margin-top: 10%;
+    margin-left: 43%;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

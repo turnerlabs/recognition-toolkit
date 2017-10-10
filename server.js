@@ -70,13 +70,17 @@ if (process.env.NODE_ENV === 'production') {
 
 function search(req, res, next) {
     console.log(req.query)
+    if (!req.query) {
+        res.status(403).json({code: 403, message: "Must pass in query value"});
+    }
+
     query = req.query.q;
     searchClient.search(query)
     .then(images => {
         res.json(images);
     }, (err) => {
         console.log('ERROR => ', err.message);
-        res.code(err.statusCode).json(err.message);
+        res.status(err.statusCode).json(err.message);
     });
 }
 
